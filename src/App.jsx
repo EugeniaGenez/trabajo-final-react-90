@@ -1,73 +1,64 @@
-import React, { useState } from 'react';
-import Lista from './components/Lista';
-import FormTarea from './components/FormTarea';
+import { useEffect, useState } from "react";
+import { TaskForm } from "./components/TaskForm";
+import { TaskItem } from "./components/TaskItem";
 
-const App = () => {
-  const [Tareas, setTareas] = useState([    //Se utiliza el hook useState para inicializar el estado de Tareas como un array vacío.
+const LOCAL_STORAGE_KEY = 'todo:tasks';
 
-    // Se guardan las tareas nuevas 
-  ]);
+function App() {
+  const [tasks, setTasks] = useState([]);
 
-  const MarcarCompleto = (TareaId) => {
-    setTareas((Tareaprevia) =>
-    Tareaprevia.map((Tarea) =>
-    Tarea.id === TareaId ? { ...Tarea, completed: !Tarea.completed } : Tarea
-      )
-    );
-  };
-
-  const Eliminar = (TareaId) => {
-    setTareas((Tareaprevia) => Tareaprevia.filter((Tarea) => Tarea.id !== TareaId));
-  };
-
-  const Modificar = (TareaId, NuevoNombre) => {
-     // Verifica si el nuevo nombre de la tarea ya existe en la lista
-  const NombreDuplicado = Tareas.some((Tarea) => Tarea.name === NuevoNombre);
-
-  // Si el nombre ya existe y no pertenece a la tarea actual, muestrar un mensaje, no modificar la tarea
-  if (NombreDuplicado && Tareas.find((Tarea) => Tarea.id !== TareaId && Tarea.name === NuevoNombre)) {
-    console.log('La tarea con este nombre ya existe.');
-    return;
+  function loadSavedTasks() {
+    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if(saved) {
+      setTasks(JSON.parse(saved));
+    }
   }
-  setTareas((Tareaprevia) =>
-  Tareaprevia.map((Tarea) =>
-  Tarea.id === TareaId ? { ...Tarea, name: NuevoNombre } : Tarea
-      )
-    );
-  };
 
-  const Agregar = (NombreTarea) => {
-
-      // Verifica si el nombre de la tarea ya existe en la lista
-  const NombreDuplicado = Tareas.some((Tarea) => Tarea.name === NombreTarea);
-
-  // Si el nombre ya existe muestrar un mensaje, no agregar la tarea
-  if (NombreDuplicado) {
-    console.log('La tarea con este nombre ya existe.');
-    return;
+  function setTasksAndSave(newTasks) {
+    setTasks(newTasks);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
   }
-    // Implementa la lógica para agregar una nueva tarea
-    const NuevaTarea = {
-      id: Tareas.length + 1,
-      name: NombreTarea,
-      completed: false,
-    };
-    
-    setTareas((Tareaprevia) => [...Tareaprevia, NuevaTarea]);
-  };
+
+  useEffect(() => {
+    loadSavedTasks();
+  }, [])
+
+  function addTask(taskTitle) {
+    setTasksAndSave([...tasks, {
+      id: crypto.randomUUID(),
+      title: taskTitle,
+      isCompleted: false
+    }]);
+  }
+
+  function deleteTaskById(taskId) {
+    const newTasks = tasks.filter(task => task.id !== taskId);
+    setTasksAndSave(newTasks);
+  }
+
+  function toggleTaskCompletedById(taskId) {
+    const newTasks = tasks.map(task => {
+      if(task.id === taskId) {
+        return {
+          ...task,
+          isCompleted: !task.isCompleted
+        }
+      }
+      return task;
+    });
+    setTasksAndSave(newTasks);
+  }
 
   return (
-    <div>
-    <h1>Gestión de Tareas</h1>
-    <FormTarea AgregarTarea={Agregar} />
-    <Lista
-      Tareas={Tareas}
-      MarcarCompleto={MarcarCompleto}
-      Eliminar={Eliminar}
-      modificar={Modificar}
-    />
-  </div>
-  );
-};
+    <>
+      <TaskForm handleAddTask={addTask} />
+      <TaskItem
+        tasks={tasks}
+        onDelete={deleteTaskById}
+        onComplete={toggleTaskCompletedById}
+      />
+    </>
+  )
+}
 
-export default App;
+export default App

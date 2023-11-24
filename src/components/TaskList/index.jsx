@@ -8,7 +8,12 @@ export function TaskList({ task, onDelete, onComplete }) {
   const alert = () => {
     Swal.fire({
       title: "Tarea Completada",
-      icon: "success"
+      icon: "success",
+      background: '#0A2229',
+      color: 'white',
+      showConfirmButton: false,
+      toast: true,
+      timer: 1500
     });
     onComplete(task.id)
   }
@@ -16,7 +21,12 @@ export function TaskList({ task, onDelete, onComplete }) {
   const deleteTask = () => {
     Swal.fire({
       title: "Tarea Eliminada",
-      icon: "success"
+      icon: "success",
+      background: "#0A2229",
+      color: 'white',
+      showConfirmButton: false,
+      toast: true,
+      timer: 1500
     });
     onDelete(task.id)
   }

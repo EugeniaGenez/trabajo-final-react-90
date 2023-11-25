@@ -1,50 +1,52 @@
-.task{
-    width:100%;
-    height:100%;
-    background:#131313;
-    border:1px solid #333333;
-    padding:16px;
-    border-radius:8px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:4rem;
+.task {
+  width: 100%;
+  height: auto;
+  background: #262626;
+  color: #808080;
+  border: 0;
+  outline: none;
+  padding: 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
 }
+
 .task p {
-    font-size: 20px;
-    line-height: 19px;
-    color: #F2F2F2;
-    margin-right: auto;
-  }
-  
-  p.textCompleted {
-    color: #c42929;
-    text-decoration: line-through;
-    font-size: 20px;
-  }
-  
-  .checkContainer {
-    width: 18px;
-    height: 18px;
-    background: none;
-    border: none;
-  }
-  
-  .checkContainer div {
-    width: 100%;
-    height: 100%;
-    border-radius: 999px;
-    border: 2px solid #53de4e;
-  }
-  
-  .checkContainer svg {
-    width: 100%;
-    height: 100%;
-    color: #c42929;
-  }
-  
-  .deleteButton {
-    background: none;
-    border: none;
-    color: #f13b3b;
-  }
+  font-size: 16px;
+  line-height: 14px;
+  color: #fff;
+  margin-right: auto;
+}
+
+p.textCompleted {
+  color: #808080;
+  text-decoration: line-through;
+}
+
+.checkContainer {
+  width: 18px;
+  height: 18px;
+  background: none;
+  border: none;
+}
+
+.checkContainer div {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  border: 2px solid #74bf62;
+}
+
+.checkContainer svg {
+  width: 100%;
+  height: 100%;
+  color: #74bf62;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: #808080;
+}

@@ -19,8 +19,7 @@ export function TaskForm({ handleAddTask}) {
 
   return (
     <header className={styles.header}>
-      <h1>Lista de Tareas</h1>
-
+      <h1>To-Do List</h1>
       <form onSubmit={handleSubmit} className={styles.newTaskForm}>
         <input placeholder="Agregar Tarea" type="text" onChange={onChangeTitle} value={title} />
         <button>Nueva Tarea <AiOutlinePlusCircle size={20} /></button>

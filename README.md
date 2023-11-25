@@ -19,7 +19,7 @@ Before getting started, make sure you have Node.js and npm installed on your sys
 git clone [REPOSITORY_URL]
 cd [NAME_REPO]
 npm install [INSTALL_DEPENDENCIES]
-npm start
+npm run dev
 ```
 ## Usage
 

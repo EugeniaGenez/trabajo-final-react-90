@@ -9,12 +9,12 @@ export function TaskItem({ tasks, onDelete, onComplete }) {
     <section className={styles.tasks}>
       <header className={styles.header}>
         <div>
-          <p>Cantidad de Tareas:</p>
+          <p>Tasks Quantity:</p>
           <span>{tasksQuantity}</span>
         </div>
 
         <div>
-          <p className={styles.textPurple}>Tareas Completadas:</p>
+          <p className={styles.textPurple}>Completed Tasks:</p>
           <span>{completedTasks} of {tasksQuantity}</span>
         </div>
       </header>
